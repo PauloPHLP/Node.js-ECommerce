@@ -21,8 +21,6 @@ class CreateProductService {
   public async execute({ name, price, quantity }: IRequest): Promise<Product> {
     const productExists = await this.productsRepository.findByName(name);
 
-    console.log(productExists);
-
     if (productExists) throw new AppError('Product already exists.');
 
     const product = await this.productsRepository.create({
